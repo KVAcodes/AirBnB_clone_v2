@@ -1,6 +1,6 @@
 -- creates a new database <hbnb_dev_db>
 -- creates a new user <hbnb_dev> (in localhost)
--- sets privileges for the the user.
+-- sets privileges for the new user.
 
 CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 CREATE USER
