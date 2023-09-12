@@ -13,6 +13,10 @@ class State(BaseModel, Base):
     cities = relationship('City', backref='state',
                           cascade='all, delete-orphan')
 
+    def __init__(self, *args, **kwargs):
+        """Constructor"""
+        super().__init__(*args, **kwargs)
+
     @property
     def cities(self):
         """returns the list of City instances with state_id equaling

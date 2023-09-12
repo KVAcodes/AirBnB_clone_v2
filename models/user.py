@@ -19,3 +19,7 @@ class User(BaseModel, Base):
     # relationship between User and Review
     reviews = relationship('Review', backref='user',
                            cascade='all, delete-orphan')
+
+    def __init__(self, *args, **kwargs):
+        """Constructor"""
+        super().__init__(*args, **kwargs)

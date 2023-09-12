@@ -14,3 +14,7 @@ class City(BaseModel, Base):
     # relationship between City and Places
     places = relationship('Place', backref='cities',
                           cascade='all, delete-orphan')
+
+    def __init__(self, *args, **kwargs):
+        """Constructor"""
+        super().__init__(*args, **kwargs)

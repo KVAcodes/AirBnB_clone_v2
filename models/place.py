@@ -1,8 +1,18 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
+
+
+place_amenity = Table(
+    'place_amenity',
+    Base.metadata,
+    Column('places_id', String(60), ForeignKey('places.id'), primary_key=True,
+           nullable=False),
+    Column('amenity_id', String(60), ForeignKey('amenities.id'),
+           primary_key=True, nullable=False)
+)
 
 
 class Place(BaseModel, Base):
@@ -25,11 +35,40 @@ class Place(BaseModel, Base):
     reviews = relationship('Review', backref='place',
                            cascade='all, delete-orphan')
 
+    amenities = relationship(
+        'Amenity',
+        secondary='place_amenity',
+        backref='place_amenities',
+        viewonly=False
+    )
+
+    def __init__(self, *args, **kwargs):
+        """Constructor"""
+        super().__init__(*args, **kwargs)
+
     @property
     def reviews(self):
         """ Returns the list of Review instances with place_id
         equalling the current Place.id.
         """
         from models import storage
+        from models.review import Review
         return [obj for obj in storage.all(Review).values()
                 if obj.place_id == self.id]
+
+    @property
+    def amenities(self):
+        """Returns the list of Amenity instances based on the attribute
+        amenity_ids."""
+        from models import storage
+        from models.amenity import Amenity
+        return [obj for obj in storage.all(Amenity).values()
+                if obj.id in self.amenity_ids]
+
+    @amenities.setter
+    def amenities(self, value):
+        """adds a Amenity obj's id into the amenity_ids class attribute.
+        """
+        from models.amenity import Amenity
+        if type(value) is Amenity:
+            self.amenity_ids.append(value.id)
