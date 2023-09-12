@@ -1,6 +1,6 @@
 WARNING: MYSQL_OPT_RECONNECT is deprecated and will be removed in a future version.
-/AirBnB_clone_v2/models/engine/db_storage.py:85: SAWarning: Column 'states.id' is marked as a member of the primary key for table 'states', but has no Python-side or server-side default generator indicated, nor does it indicate 'autoincrement=True' or 'nullable=True', and no explicit value is passed.  Primary key columns typically may not store NULL.
-  self.__session.commit()
+WARNING: MYSQL_OPT_RECONNECT is deprecated and will be removed in a future version.
+WARNING: MYSQL_OPT_RECONNECT is deprecated and will be removed in a future version.
 Traceback (most recent call last):
   File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1965, in _exec_single_context
     self.dialect.do_execute(
@@ -12,14 +12,14 @@ Traceback (most recent call last):
     db.query(q)
   File "/usr/local/lib/python3.8/dist-packages/MySQLdb/connections.py", line 259, in query
     _mysql.connection.query(self, query)
-MySQLdb._exceptions.IntegrityError: (1364, "Field 'id' doesn't have a default value")
+MySQLdb._exceptions.OperationalError: (1048, "Column 'first_name' cannot be null")
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "./main_place_amenities.py", line 8, in <module>
-    state.save()
-  File "/AirBnB_clone_v2/models/base_model.py", line 44, in save
+  File "./main_place_amenities.py", line 16, in <module>
+    user.save()
+  File "/AirBnB_clone_v2/models/base_model.py", line 43, in save
     storage.save()
   File "/AirBnB_clone_v2/models/engine/db_storage.py", line 85, in save
     self.__session.commit()
@@ -49,7 +49,7 @@ Traceback (most recent call last):
     util.preloaded.orm_persistence.save_obj(
   File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
     _emit_insert_statements(
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/persistence.py", line 1226, in _emit_insert_statements
+  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/orm/persistence.py", line 1043, in _emit_insert_statements
     result = connection.execute(
   File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1412, in execute
     return meth(
@@ -73,7 +73,7 @@ Traceback (most recent call last):
     db.query(q)
   File "/usr/local/lib/python3.8/dist-packages/MySQLdb/connections.py", line 259, in query
     _mysql.connection.query(self, query)
-sqlalchemy.exc.IntegrityError: (MySQLdb._exceptions.IntegrityError) (1364, "Field 'id' doesn't have a default value")
-[SQL: INSERT INTO states (name, created_at, updated_at) VALUES (%s, %s, %s)]
-[parameters: ('California', datetime.datetime(2023, 9, 12, 20, 28, 43, 289541), datetime.datetime(2023, 9, 12, 20, 28, 43, 363846))]
-(Background on this error at: https://sqlalche.me/e/20/gkpj)
+sqlalchemy.exc.OperationalError: (MySQLdb._exceptions.OperationalError) (1048, "Column 'first_name' cannot be null")
+[SQL: INSERT INTO users (email, password, first_name, last_name, id, created_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s)]
+[parameters: ('john@snow.com', 'johnpwd', None, None, 'f117a4e3-929b-4ba6-a8b8-6e27b364a514', datetime.datetime(2023, 9, 12, 21, 1, 13, 551275), datetime.datetime(2023, 9, 12, 21, 1, 13, 702754))]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
