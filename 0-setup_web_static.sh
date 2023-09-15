@@ -10,8 +10,8 @@ ufw allow 'Nginx HTTP'
 fi
 
 # Creates the necessary directories
-mkdir -p /data/web_static/releases/test/
-mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test/
+sudo mkdir -p /data/web_static/shared/
 
 # Creates index.html file.
 html_content="<html>
@@ -30,13 +30,13 @@ then
     rm /data/web_static/current
 fi
 
-ln -s /data/web_static/releases/test/ /data/web_static/current
+sudo ln -s /data/web_static/releases/test/ /data/web_static/current
 
 # Gives ownership of /data folder to the ubuntu user and group
 sudo chown -R ubuntu:ubuntu /data
 
 # Updates the Nginx configuration to serve the hbnb_static content
-sed -i '/listen \[::\]:80 default_server;/a \    location \/hbnb_static\/ {\n        alias \/data\/web_static\/current\/;\n    }' /etc/nginx/sites-available/default
+sudo sed -i '/listen \[::\]:80 default_server;/a \    location \/hbnb_static\/ {\n        alias \/data\/web_static\/current\/;\n    }' /etc/nginx/sites-available/default
 
 # Restart nginx
-nginx -s reload
+sudo nginx -s reload
