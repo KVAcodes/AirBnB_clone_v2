@@ -7,10 +7,11 @@ then
 sudo apt-get -y update
 sudo apt-get -y install nginx
 ufw allow 'Nginx HTTP'
+fi
 
 # Creates the necessary directories
 mkdir -p /data/web_static/releases/test/
-mkdir /data/web_static/shared/
+mkdir -p /data/web_static/shared/
 
 # Creates index.html file.
 html_content="<html>
@@ -18,7 +19,7 @@ html_content="<html>
 \t</head>
 \t<body>
 \t\tHolberton School
-\t/body>
+\t</body>
 </html>"
 
 echo -e "$html_content" > /data/web_static/releases/test/index.html
@@ -28,9 +29,14 @@ if [ -L /data/web_static/current ]
 then
     rm /data/web_static/current
 fi
+
 ln -s /data/web_static/releases/test/ /data/web_static/current
 
 # Gives ownership of /data folder to the ubuntu user and group
 sudo chown -R ubuntu:ubuntu /data
 
+# Updates the Nginx configuration to serve the hbnb_static content
+sed -i '/listen \[::\]:80 default_server;/a \    location \/hbnb_static\/ {\n        alias \/data\/web_static\/current\/;\n    }' /etc/nginx/sites-available/default
 
+# Restart nginx
+nginx -s reload
