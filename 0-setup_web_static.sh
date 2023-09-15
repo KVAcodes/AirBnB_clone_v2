@@ -6,7 +6,6 @@ if ! dpkg -l | grep -q "nginx"
 then
 sudo apt-get -y update
 sudo apt-get -y install nginx
-ufw allow 'Nginx HTTP'
 fi
 
 # Creates the necessary directories
@@ -25,12 +24,7 @@ html_content="<html>
 echo -e "$html_content" > /data/web_static/releases/test/index.html
 
 # Creates a symbolic link, deletes and recreates it if it exists.
-if [ -L /data/web_static/current ]
-then
-    rm /data/web_static/current
-fi
-
-sudo ln -s /data/web_static/releases/test/ /data/web_static/current
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 # Gives ownership of /data folder to the ubuntu user and group
 sudo chown -R ubuntu:ubuntu /data
@@ -39,4 +33,4 @@ sudo chown -R ubuntu:ubuntu /data
 sudo sed -i '/listen \[::\]:80 default_server;/a \    location \/hbnb_static\/ {\n        alias \/data\/web_static\/current\/;\n    }' /etc/nginx/sites-available/default
 
 # Restart nginx
-sudo nginx -s reload
+service nginx restart
