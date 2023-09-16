@@ -4,7 +4,7 @@ that distributes an archive to my web servers, using the function
 do_deploy:
 """
 from fabric.api import *
-
+import os.path
 
 env.hosts = ['18.234.253.121', '52.87.220.207']
 
@@ -13,6 +13,9 @@ def do_deploy(archive_path):
     """Deploys the archive containing the web_static of thr
     Airbnb project.
     """
+    if os.path.isfile(archive_path) is False:
+        return False
+
     put_result = put(
         archive_path,
         '/tmp/'
@@ -23,7 +26,7 @@ def do_deploy(archive_path):
     archive_name = archive_path.split('/')[-1]
     archive_name_wt_ext = archive_name.split('.')[0]
 
-    sudo_result = sudo(
+    run_result = run(
         f"mkdir -p /data/web_static/releases/{archive_name_wt_ext}\n"
         f"tar -xzf /tmp/{archive_name} -C "
         f"/data/web_static/releases/{archive_name_wt_ext}\n"
@@ -34,8 +37,7 @@ def do_deploy(archive_path):
         f"rm -rf /data/web_static/current\n"
         f"ln -s /data/web_static/releases/{archive_name_wt_ext}/ "
         f"/data/web_static/current\n"
-        f"nginx -s reload\n"
     )
-    if sudo_result.failed:
+    if run_result.failed:
         return False
     return True
