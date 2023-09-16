@@ -1,21 +1,17 @@
 #!/usr/bin/python3
-""" A Fabric script (based on the file 1-pack_web_static.py)
-that distributes an archive to my web servers, using the function
-do_deploy:
 """
-import os.path
-from fabric.api import env
-from fabric.api import put
-from fabric.api import run
+Fabric script based on the file 1-pack_web_static.py that distributes an
+archive to the web servers
+"""
 
-env.hosts = ['18.234.253.121', '52.87.220.207']
+from fabric.api import put, run, env
+from os.path import exists
+env.hosts = ['142.44.167.228', '144.217.246.195']
 
 
 def do_deploy(archive_path):
-    """Deploys the archive containing the web_static of thr
-    Airbnb project.
-    """
-    if os.path.isfile(archive_path) is False:
+    """distributes an archive to the web servers"""
+    if exists(archive_path) is False:
         return False
     try:
         file_n = archive_path.split("/")[-1]
