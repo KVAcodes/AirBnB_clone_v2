@@ -16,13 +16,6 @@ def do_deploy(archive_path):
     if os.path.isfile(archive_path) is False:
         return False
 
-    put_result = put(
-        archive_path,
-        '/tmp/'
-    )
-    if put_result.failed:
-        return False
-
     file = archive_path.split("/")[-1]
     name = file.split(".")[0]
 
