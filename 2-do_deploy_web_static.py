@@ -13,11 +13,11 @@ def do_deploy(archive_path):
     """Deploys the archive containing the web_static of thr
     Airbnb project.
     """
-    local_result = local(
-        f"ls -l ./{archive_path}",
-    )
-    if not local_result.return_code == 0:
-        return False
+    #local_result = local(
+    #    f"ls -l ./{archive_path}",
+    #)
+    #if not local_result.return_code == 0:
+    #    return False
 
     put_result = put(
         archive_path,
