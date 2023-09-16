@@ -1,30 +1,43 @@
 #!/usr/bin/python3
+""" A Fabric script (based on the file 1-pack_web_static.py)
+that distributes an archive to my web servers, using the function
+do_deploy:
 """
-Fabric script based on the file 1-pack_web_static.py that distributes an
-archive to the web servers
-"""
+from fabric.api import *
+import os.path
 
-from fabric.api import put, run, env
-from os.path import exists
 env.hosts = ['18.234.253.121', '52.87.220.207']
 
 
 def do_deploy(archive_path):
-    """distributes an archive to the web servers"""
-    if exists(archive_path) is False:
+    """Deploys the archive containing the web_static of thr
+    Airbnb project.
+    """
+    if os.path.isfile(archive_path) is False:
         return False
-    try:
-        file_n = archive_path.split("/")[-1]
-        no_ext = file_n.split(".")[0]
-        path = "/data/web_static/releases/"
-        put(archive_path, '/tmp/')
-        run('mkdir -p {}{}/'.format(path, no_ext))
-        run('tar -xzf /tmp/{} -C {}{}/'.format(file_n, path, no_ext))
-        run('rm /tmp/{}'.format(file_n))
-        run('mv {0}{1}/web_static/* {0}{1}/'.format(path, no_ext))
-        run('rm -rf {}{}/web_static'.format(path, no_ext))
-        run('rm -rf /data/web_static/current')
-        run('ln -s {}{}/ /data/web_static/current'.format(path, no_ext))
-        return True
-    except:
+
+    put_result = put(
+        archive_path,
+        '/tmp/'
+    )
+    if put_result.failed:
         return False
+
+    archive_name = archive_path.split('/')[-1]
+    archive_name_wt_ext = archive_name.split('.')[0]
+
+    run_result = run(
+        f"mkdir -p /data/web_static/releases/{archive_name_wt_ext}\n"
+        f"tar -xzf /tmp/{archive_name} -C "
+        f"/data/web_static/releases/{archive_name_wt_ext}\n"
+        f"mv /data/web_static/releases/{archive_name_wt_ext}/web_static/* "
+        f"/data/web_static/releases/{archive_name_wt_ext}/\n"
+        f"rm -rf /data/web_static/releases/{archive_name_wt_ext}/web_static\n"
+        f"rm /tmp/{archive_name}\n"
+        f"rm -rf /data/web_static/current\n"
+        f"ln -s /data/web_static/releases/{archive_name_wt_ext}/ "
+        f"/data/web_static/current\n"
+    )
+    if run_result.failed:
+        return False
+    return True
