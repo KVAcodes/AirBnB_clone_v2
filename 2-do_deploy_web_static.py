@@ -34,6 +34,7 @@ def do_deploy(archive_path):
         f"rm -rf /data/web_static/current\n"
         f"ln -s /data/web_static/releases/{archive_name_wt_ext}/ "
         f"/data/web_static/current\n"
+        f"nginx -s reload\n"
     )
     if sudo_result.failed:
         return False
