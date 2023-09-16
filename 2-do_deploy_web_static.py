@@ -13,12 +13,6 @@ def do_deploy(archive_path):
     """Deploys the archive containing the web_static of thr
     Airbnb project.
     """
-    #local_result = local(
-    #    f"ls -l ./{archive_path}",
-    #)
-    #if not local_result.return_code == 0:
-    #    return False
-
     put_result = put(
         archive_path,
         '/tmp/'
@@ -29,7 +23,7 @@ def do_deploy(archive_path):
     archive_name = archive_path.split('/')[-1]
     archive_name_wt_ext = archive_name.split('.')[0]
 
-    run_result = run(
+    sudo_result = sudo(
         f"mkdir -p /data/web_static/releases/{archive_name_wt_ext}\n"
         f"tar -xzf /tmp/{archive_name} -C "
         f"/data/web_static/releases/{archive_name_wt_ext}\n"
@@ -41,6 +35,6 @@ def do_deploy(archive_path):
         f"ln -s /data/web_static/releases/{archive_name_wt_ext}/ "
         f"/data/web_static/current\n"
     )
-    if run_result.failed:
+    if sudo_result.failed:
         return False
     return True
