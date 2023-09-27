@@ -18,7 +18,6 @@ def list_state():
     nameId_list = [(state.id, state.name) for state in
                    state_list]
     nameId_list = sorted(nameId_list, key=lambda x: x[1])
-    print(f"-->: {nameId_list}")
     return render_template("7-states_list.html", nameId_list=nameId_list)
 
 
