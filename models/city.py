@@ -2,6 +2,7 @@
 """Defines the City class."""
 from models.base_model import Base
 from models.base_model import BaseModel
+from models.place import Place
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import String
