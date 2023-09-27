@@ -7,6 +7,9 @@ from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import String
 from sqlalchemy.orm import relationship
+from os import getenv
+
+STORAGE_TYPE = getenv('HBNB_TYPE_STORAGE')
 
 
 class City(BaseModel, Base):
@@ -19,7 +22,12 @@ class City(BaseModel, Base):
         name (sqlalchemy String): The name of the City.
         state_id (sqlalchemy String): The state id of the City.
     """
-    __tablename__ = "cities"
-    name = Column(String(128), nullable=False)
-    state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
-    places = relationship("Place", backref="cities", cascade="delete")
+    if STORAGE_TYPE == "db":
+        __tablename__ = "cities"
+        name = Column(String(128), nullable=False)
+        state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
+        places = relationship("Place", backref="cities", cascade="delete")
+    else:
+        state_id = ''
+        name = ''
+        places = []

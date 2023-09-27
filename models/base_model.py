@@ -7,8 +7,16 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column
 from sqlalchemy import DateTime
 from sqlalchemy import String
+from os import getenv
 
-Base = declarative_base()
+
+STORAGE_TYPE = getenv('HBNB_TYPE_STORAGE')
+
+if STORAGE_TYPE == 'db':
+    Base = declarative_base()
+else:
+    class Base:
+        pass
 
 
 class BaseModel:
@@ -19,10 +27,10 @@ class BaseModel:
         created_at (sqlalchemy DateTime): The datetime at creation.
         updated_at (sqlalchemy DateTime): The datetime of last update.
     """
-
-    id = Column(String(60), primary_key=True, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
-    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+    if STORAGE_TYPE == 'db':
+        id = Column(String(60), primary_key=True, nullable=False)
+        created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+        updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         """Initialize a new BaseModel.
