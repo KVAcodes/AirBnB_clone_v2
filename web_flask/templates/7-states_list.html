@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>HBNB</TITLE>
+    </HEAD>
+    <BODY>
+        <H1>States</H1>
+        <UL>
+            {% if nameId_list %}
+                {% for pair in nameId_list %}
+                    <LI>{{ pair[0] }}: <B>{{ pair[1] }}</B></LI>
+                {% endfor %}
+            {% endif %}
+        </UL>
+    </BODY>
+</HTML>
