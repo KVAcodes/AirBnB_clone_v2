@@ -1,87 +1,52 @@
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1965, in _exec_single_context
-    self.dialect.do_execute(
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/default.py", line 921, in do_execute
-    cursor.execute(statement, parameters)
-  File "/usr/local/lib/python3.8/dist-packages/MySQLdb/cursors.py", line 206, in execute
-    res = self._query(query)
-  File "/usr/local/lib/python3.8/dist-packages/MySQLdb/cursors.py", line 319, in _query
-    db.query(q)
-  File "/usr/local/lib/python3.8/dist-packages/MySQLdb/connections.py", line 259, in query
-    _mysql.connection.query(self, query)
-MySQLdb._exceptions.OperationalError: (3780, "Referencing column 'city_id' and referenced column 'id' in foreign key constraint 'places_ibfk_1' are incompatible.")
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/usr/lib/python3.8/runpy.py", line 194, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/usr/lib/python3.8/runpy.py", line 87, in _run_code
-    exec(code, run_globals)
-  File "/AirBnB_clone_v2/web_flask/7-states_list.py", line 4, in <module>
-    from models import storage
-  File "/AirBnB_clone_v2/models/__init__.py", line 17, in <module>
-    storage.reload()
-  File "/AirBnB_clone_v2/models/engine/db_storage.py", line 76, in reload
-    Base.metadata.create_all(self.__engine)
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/sql/schema.py", line 5822, in create_all
-    bind._run_ddl_visitor(
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 3239, in _run_ddl_visitor
-    conn._run_ddl_visitor(visitorcallable, element, **kwargs)
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 2443, in _run_ddl_visitor
-    visitorcallable(self.dialect, self, **kwargs).traverse_single(element)
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/sql/visitors.py", line 670, in traverse_single
-    return meth(obj, **kw)
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/sql/ddl.py", line 922, in visit_metadata
-    self.traverse_single(
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/sql/visitors.py", line 670, in traverse_single
-    return meth(obj, **kw)
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/sql/ddl.py", line 955, in visit_table
-    CreateTable(
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/sql/ddl.py", line 315, in _invoke_with
-    return bind.execute(self)
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1412, in execute
-    return meth(
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/sql/ddl.py", line 181, in _execute_on_connection
-    return connection._execute_ddl(
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1524, in _execute_ddl
-    ret = self._execute_context(
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1844, in _execute_context
-    return self._exec_single_context(
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1984, in _exec_single_context
-    self._handle_dbapi_exception(
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 2339, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/base.py", line 1965, in _exec_single_context
-    self.dialect.do_execute(
-  File "/usr/local/lib/python3.8/dist-packages/sqlalchemy/engine/default.py", line 921, in do_execute
-    cursor.execute(statement, parameters)
-  File "/usr/local/lib/python3.8/dist-packages/MySQLdb/cursors.py", line 206, in execute
-    res = self._query(query)
-  File "/usr/local/lib/python3.8/dist-packages/MySQLdb/cursors.py", line 319, in _query
-    db.query(q)
-  File "/usr/local/lib/python3.8/dist-packages/MySQLdb/connections.py", line 259, in query
-    _mysql.connection.query(self, query)
-sqlalchemy.exc.OperationalError: (MySQLdb._exceptions.OperationalError) (3780, "Referencing column 'city_id' and referenced column 'id' in foreign key constraint 'places_ibfk_1' are incompatible.")
-[SQL: 
-CREATE TABLE places (
-	city_id VARCHAR(60) NOT NULL, 
-	user_id VARCHAR(60) NOT NULL, 
-	name VARCHAR(128) NOT NULL, 
-	description VARCHAR(1024), 
-	number_rooms INTEGER, 
-	number_bathrooms INTEGER, 
-	max_guest INTEGER, 
-	price_by_night INTEGER, 
-	latitude FLOAT, 
-	longitude FLOAT, 
-	id VARCHAR(60) NOT NULL, 
-	created_at DATETIME NOT NULL, 
-	updated_at DATETIME NOT NULL, 
-	PRIMARY KEY (id), 
-	FOREIGN KEY(city_id) REFERENCES cities (id), 
-	FOREIGN KEY(user_id) REFERENCES users (id)
-)
-
-]
-(Background on this error at: https://sqlalche.me/e/20/e3q8)
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>HBNB</TITLE>
+    </HEAD>
+    <BODY>
+        <H1>States</H1>
+        <UL>
+            
+                
+                <LI>421a55f4-7d82-47d9-b54c-a76916479545: <B>Alabama</B>
+                    <UL>
+                        
+                            <LI>521a55f4-7d82-47d9-b54c-a76916479545: <B>Akron</B></LI>
+                        
+                    </UL>
+                </LI>
+                
+                <LI>421a55f4-7d82-47d9-b54c-a76916479547: <B>Arizona</B>
+                    <UL>
+                        
+                            <LI>521a55f4-7d82-47d9-b54c-a76916479550: <B>Portland</B></LI>
+                        
+                    </UL>
+                </LI>
+                
+                <LI>421a55f4-7d82-47d9-b54c-a76916479546: <B>California</B>
+                    <UL>
+                        
+                            <LI>521a55f4-7d82-47d9-b54c-a76916479546: <B>Douglas</B></LI>
+                        
+                            <LI>521a55f4-7d82-47d9-b54c-a76916479547: <B>Douglas</B></LI>
+                        
+                            <LI>521a55f4-7d82-47d9-b54c-a76916479549: <B>Chicago</B></LI>
+                        
+                    </UL>
+                </LI>
+                
+                <LI>421a55f4-7d82-47d9-b54c-a76916479548: <B>Colorado</B>
+                    <UL>
+                        
+                            <LI>521a55f4-7d82-47d9-b54c-a76916479551: <B>Kailua</B></LI>
+                        
+                            <LI>521a55f4-7d82-47d9-b54c-a76916479552: <B>Eugene</B></LI>
+                        
+                    </UL>
+                </LI>
+                
+            
+        </UL>
+    </BODY>
+</HTML>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>HBNB</TITLE>
+    </HEAD>
+    <BODY>
+        <H1>States</H1>
+        <UL>
+        
+            <LI>421a55f4-7d82-47d9-b54c-a76916479545: <B>Alabama</B>
+	        <UL>
+	        
+	            <LI>521a55f4-7d82-47d9-b54c-a76916479545: <B>Akron</B></LI>
+	        
+	        </UL>
+	    </LI>
+        
+            <LI>421a55f4-7d82-47d9-b54c-a76916479547: <B>Arizona</B>
+	        <UL>
+	        
+	            <LI>521a55f4-7d82-47d9-b54c-a76916479550: <B>Portland</B></LI>
+	        
+	        </UL>
+	    </LI>
+        
+            <LI>421a55f4-7d82-47d9-b54c-a76916479546: <B>California</B>
+	        <UL>
+	        
+	            <LI>521a55f4-7d82-47d9-b54c-a76916479549: <B>Chicago</B></LI>
+	        
+	            <LI>521a55f4-7d82-47d9-b54c-a76916479546: <B>Douglas</B></LI>
+	        
+	            <LI>521a55f4-7d82-47d9-b54c-a76916479547: <B>Douglas</B></LI>
+	        
+	        </UL>
+	    </LI>
+        
+            <LI>421a55f4-7d82-47d9-b54c-a76916479548: <B>Colorado</B>
+	        <UL>
+	        
+	            <LI>521a55f4-7d82-47d9-b54c-a76916479552: <B>Eugene</B></LI>
+	        
+	            <LI>521a55f4-7d82-47d9-b54c-a76916479551: <B>Kailua</B></LI>
+	        
+	        </UL>
+	    </LI>
+        
+        </UL>
+    </BODY>
+</HTML>
