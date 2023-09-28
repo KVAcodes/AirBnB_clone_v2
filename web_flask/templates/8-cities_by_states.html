@@ -8,13 +8,13 @@
         <UL>
             {% if states and cities %}
                 {% for i in range(length) %}
-                    <LI>{{ states[i].id }}: <B>{{ states[i].name }}</B>
-                        <UL>
-                            {% for city in cities[i] %}
-                                <LI>{{ city.id }}: <B>{{ city.name }}</B></LI>
-                            {% endfor %}
-                        </UL>
-                    </LI>
+                <LI>{{ states[i].id }}: <B>{{ states[i].name }}</B>
+                    <UL>
+                        {% for city in cities[i] %}
+                            <LI>{{ city.id }}: <B>{{ city.name }}</B></LI>
+                        {% endfor %}
+                    </UL>
+                </LI>
                 {% endfor %}
             {% endif %}
         </UL>
